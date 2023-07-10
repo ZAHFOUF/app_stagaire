@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+
+<div style="display: flex;
+    justify-content: space-between;
+    align-items: center;" class="p-5">
+
+   <h2 class="text-dark">  Liste Des Stagaires </h2>
+
+
+   <button type="button" class="btn btn-success"> <a  style="color:#FFF;" href="{{ path('app_stagaire_add') }}"> ajouter </a>  </button>
+
+
+   <button type="button" class="btn btn-warning"> <a download  style="color:#FFF;" href="{{ path('app_stagaire_download') }}"> Telechrger Touts <i class="fas fa-cloud-arrow-down"></i> </a>  </button>
+
+
+
+
+</div>
+
+
+
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Nom Complete</th>
+      <th>Age</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stagaire in stagaires %}
+    <tr>
+    
+<td>
+        <div class="d-flex align-items-center">
+          <img
+         
+              src="{{ asset('images/') }}{{stagaire.image}}"
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{ stagaire.nom }} {{stagaire.prename}}</p>
+            
+          </div>
+        </div>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{ stagaire.age }}</p>
+      </td>
+
+      <td>
+      
+
+       {{ form_start(form_delete , {'method': 'DELETE' , 'action': path('app_stagaire_delete',{id:stagaire.id})}) }}
+        <button
+                style="color:red"
+                type="submit"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                
+                >
+      
+       supprimer 
+        </button>
+     {{ form_end(form_delete) }}
+    
+         <button
+                style="color:green"
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                
+                >
+          <a style="color:green !important;" href="{{ path('app_stagaire_edit',{id:stagaire.id}) }}">    editer </a>
+        </button>
+         <button
+                style="color:green"
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                
+                >
+       <a href="{{ path('app_stagaire_show',{id:stagaire.id}) }}">    consulter </a>
+        </button>
+           
+
+    </tr>
+
+
+
+{% endfor %}
+  </tbody>
+</table>
+
+
+ {% if app.user %}
+        <div class="p-3">
+            Bienvenue ! Vous êtes identifié avec  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+<!-- Content here -->
+</div>
+
+
+
+
+
+
+{% endblock %}

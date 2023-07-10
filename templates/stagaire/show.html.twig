@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block body %}
+
+<div class="card">
+  <img width="50px" style="width:150px;" src="{{ asset('images/') }}{{stagaire.image}}" class="card-img-top" alt="Fissure in Sandstone"/>
+  <div class="card-body">
+    <h5 class="card-title">{{stagaire.nom}} {{stagaire.prename}}</h5>
+    <p class="card-text" > Age : {{ stagaire.age }}</p>
+  </div>
+</div>
+
+
+
+{% endblock %}
